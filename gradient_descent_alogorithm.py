@@ -1,4 +1,5 @@
-# Gradient descent for Linear Regression
+# Gradient descent for Linear Regression - Automate the process of optimizing w and b using gradient descent
+# Housing price prediction
 '''Funtions: compute_gradient - compute the derivatives
              compute_cost - compute the cost function
              gradient_descent - use derivatives and cost function to find optimal w,b'''
@@ -9,6 +10,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Load the dataset
+# x_train is the input variable (size in 1000 square feet)
+# y_train is the target (price in 1000s of dollars)
+# dataset with only two data points - size of house (1000 sqft), price( 1000s of dollars)
 x_train = np.array([1.0,2.0]) #feature inputs
 y_train = np.array([300.0,500.0]) #target values
 
@@ -111,3 +115,24 @@ w_final, b_final, J_hist, p_hist = gradient_descent(x_train ,y_train, w_init, b_
                                                     iterations, compute_cost, compute_gradient)
 print(f"(w,b) found by gradient descent: ({w_final:8.4f},{b_final:8.4f})")
 
+# cost versus iterations of gradient descent
+'''A plot of cost versus iterations is a useful measure of progress in gradient descent. 
+   Cost should always decrease in successful runs. 
+   The change in cost is so rapid initially, it is useful to plot the initial decent on a different scale than the final descent. 
+   In the plots below, note the scale of cost on the axes and the iteration step. '''
+
+# plot cost versus iteration  
+fig, (ax1, ax2) = plt.subplots(1, 2, constrained_layout=True, figsize=(12,4))
+ax1.plot(J_hist[:100])
+ax2.plot(1000 + np.arange(len(J_hist[1000:])), J_hist[1000:])
+ax1.set_title("Cost vs. iteration(start)");  ax2.set_title("Cost vs. iteration (end)")
+ax1.set_ylabel('Cost')            ;  ax2.set_ylabel('Cost') 
+ax1.set_xlabel('iteration step')  ;  ax2.set_xlabel('iteration step') 
+plt.show()
+
+# Predictions
+# Once optimal values for params w and b are discovered, we can use the model to predict housing values based on the learned parameters
+
+print(f"1000 sqft house prediction {w_final*1.0 + b_final:0.1f} Thousand dollars")
+print(f"1200 sqft house prediction {w_final*1.2 + b_final:0.1f} Thousand dollars")
+print(f"2000 sqft house prediction {w_final*2.0 + b_final:0.1f} Thousand dollars")
