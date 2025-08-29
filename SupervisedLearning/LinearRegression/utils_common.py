@@ -14,6 +14,18 @@ def load_house_data():
     y = data[:,4]
     return X, y
 
+def load_data():
+    data = np.loadtxt("data/ex1data1.txt", delimiter=',')
+    X = data[:,0]
+    y = data[:,1]
+    return X, y
+
+def load_data_multi():
+    data = np.loadtxt("data/ex1data2.txt", delimiter=',')
+    X = data[:,:2]
+    y = data[:,2]
+    return X, y
+
 def norm_plot(ax, data):
     scale = (np.max(data) - np.min(data))*0.2
     x = np.linspace(np.min(data)-scale,np.max(data)+scale,50)
