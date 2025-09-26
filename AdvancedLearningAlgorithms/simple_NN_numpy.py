@@ -2,8 +2,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow as tf
-from lab_utils_common import sigmoid
-from lab_coffee_utils import load_coffee_data, plt_roast
+from utils_common import sigmoid
+from coffee_utils import load_coffee_data, plt_roast
 import logging
 logging.getLogger("tensorflow").setLevel(logging.ERROR)
 tf.autograph.set_verbosity(0)
