@@ -9,8 +9,7 @@ from tensorflow.keras.layers import Dense, Input
 from tensorflow.keras import Sequential
 from tensorflow.keras.losses import MeanSquaredError, BinaryCrossentropy
 from tensorflow.keras.activations import sigmoid
-from lab_utils_common import dlc
-from lab_neurons_utils import plt_prob_1d, sigmoidnp, plt_linear, plt_logistic
+
 import logging
 logging.getLogger("tensorflow").setLevel(logging.ERROR)
 tf.autograph.set_verbosity(0)
@@ -77,7 +76,7 @@ neg = Y_train == 0
 fig,ax = plt.subplots(1,1,figsize=(4,3))
 ax.scatter(X_train[pos], Y_train[pos], marker='x', s=80, c = 'red', label="y=1")
 ax.scatter(X_train[neg], Y_train[neg], marker='o', s=100, label="y=0", facecolors='none', 
-              edgecolors=dlc["dlblue"],lw=3)
+              edgecolors='blue',lw=3)
 
 ax.set_ylim(-0.08,1.1)
 ax.set_ylabel('y', fontsize=12)
@@ -110,6 +109,26 @@ set_b = np.array([-4.5])
 # set_weights takes a list of numpy arrays
 logistic_layer.set_weights([set_w, set_b])
 print(logistic_layer.get_weights())
+
+
+def sigmoidnp(z):
+    """
+    Compute the sigmoid of z
+
+    Parameters
+    ----------
+    z : array_like
+        A scalar or numpy array of any size.
+
+    Returns
+    -------
+     g : array_like
+         sigmoid(z)
+    """
+    z = np.clip( z, -500, 500 )           # protect against overflow
+    g = 1.0/(1.0+np.exp(-z))
+
+    return g
 
 a1 = model.predict(X_train[0].reshape(1,1))
 print(a1)
