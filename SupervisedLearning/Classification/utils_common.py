@@ -6,6 +6,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyArrowPatch
 
+def load_data(filename):
+    data = np.loadtxt(filename, delimiter=',')
+    X = data[:,:2]
+    y = data[:,2]
+    return X, y
+
 def sigmoid(z):
     """
     Compute the sigmoid of z
